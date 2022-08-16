@@ -44,7 +44,7 @@ return Scaffold(
       return Stack(
         children: [
           Positioned.fill(
-            child: Container(color: Colors.black),
+            child: Container(color: AppColors(context).black),
           ),
           Positioned.fill(
             child: Image.network(
@@ -74,7 +74,7 @@ return Scaffold(
                   user.userName,
                   style: TextStyle(
                     fontSize: 17,
-                    color: Colors.white,
+                    color: AppColors(context).white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -91,7 +91,7 @@ return Scaffold(
           padding: const EdgeInsets.only(top: 32),
           child: IconButton(
             padding: EdgeInsets.zero,
-            color: Colors.white,
+            color: AppColors(context).white,
             icon: Icon(Icons.close),
             onPressed: () {
               Navigator.pop(context);

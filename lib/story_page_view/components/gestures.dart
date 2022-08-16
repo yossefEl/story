@@ -38,8 +38,7 @@ class Gestures extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 context.read<StoryStackController>().increment(
-                      restartAnimation: () =>
-                          animationController!.forward(from: 0),
+                      restartAnimation: () => animationController!.forward(from: 0),
                       completeAnimation: () => animationController!.value = 1,
                     );
               },

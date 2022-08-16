@@ -11,6 +11,7 @@ class Indicators extends StatefulWidget {
     required this.storyLength,
     required this.isCurrentPage,
     required this.isPaging,
+    this.indicatorColor,
     required this.padding,
   }) : super(key: key);
   final int storyLength;
@@ -18,6 +19,7 @@ class Indicators extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final bool isCurrentPage;
   final bool isPaging;
+  final Color? indicatorColor;
 
   @override
   _IndicatorsState createState() => _IndicatorsState();
@@ -30,11 +32,10 @@ class _IndicatorsState extends State<Indicators> {
   void initState() {
     super.initState();
     widget.animationController!.forward();
-    indicatorAnimation =
-        Tween(begin: 0.0, end: 1.0).animate(widget.animationController!)
-          ..addListener(() {
-            setState(() {});
-          });
+    indicatorAnimation = Tween(begin: 0.0, end: 1.0).animate(widget.animationController!)
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   @override
@@ -44,14 +45,10 @@ class _IndicatorsState extends State<Indicators> {
     if (!widget.isCurrentPage && widget.isPaging) {
       widget.animationController!.stop();
     }
-    if (!widget.isCurrentPage &&
-        !widget.isPaging &&
-        widget.animationController!.value != 0) {
+    if (!widget.isCurrentPage && !widget.isPaging && widget.animationController!.value != 0) {
       widget.animationController!.value = 0;
     }
-    if (widget.isCurrentPage &&
-        !widget.animationController!.isAnimating &&
-        !isStoryEnded) {
+    if (widget.isCurrentPage && !widget.animationController!.isAnimating && !isStoryEnded) {
       widget.animationController!.forward(from: 0);
     }
     return Padding(
@@ -63,6 +60,7 @@ class _IndicatorsState extends State<Indicators> {
           widget.storyLength,
           (index) => _Indicator(
             index: index,
+            indicatorColor: widget.indicatorColor,
             value: (index == currentStoryIndex)
                 ? indicatorAnimation.value
                 : (index > currentStoryIndex)
@@ -86,9 +84,11 @@ class _Indicator extends StatelessWidget {
     Key? key,
     required this.index,
     required this.value,
+    this.indicatorColor,
   }) : super(key: key);
   final int index;
   final double value;
+  final Color? indicatorColor;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,7 @@ class _Indicator extends StatelessWidget {
         child: LinearProgressIndicator(
           value: value,
           backgroundColor: Colors.black.withOpacity(0.08),
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          valueColor: AlwaysStoppedAnimation<Color>(indicatorColor ?? Colors.white),
           minHeight: 2,
         ),
       ),

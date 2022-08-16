@@ -9,4 +9,8 @@ class StoryLimitController extends ValueNotifier<bool> {
       value = true;
     }
   }
+
+  void init() {
+    value = false;
+  }
 }

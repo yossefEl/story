@@ -98,8 +98,8 @@ class _StoryPageState extends State<StoryPage> {
   @override
   void initState() {
     super.initState();
-    indicatorAnimationController = ValueNotifier<IndicatorAnimationCommand>(
-        IndicatorAnimationCommand.resume);
+    indicatorAnimationController =
+        ValueNotifier<IndicatorAnimationCommand>(IndicatorAnimationCommand.resume);
   }
 
   @override
@@ -179,8 +179,7 @@ class _StoryPageState extends State<StoryPage> {
                 child: ElevatedButton(
                   child: Text('show modal bottom sheet'),
                   onPressed: () async {
-                    indicatorAnimationController.value =
-                        IndicatorAnimationCommand.pause;
+                    indicatorAnimationController.value = IndicatorAnimationCommand.pause;
                     await showModalBottomSheet(
                       context: context,
                       builder: (context) => SizedBox(
@@ -196,8 +195,7 @@ class _StoryPageState extends State<StoryPage> {
                         ),
                       ),
                     );
-                    indicatorAnimationController.value =
-                        IndicatorAnimationCommand.resume;
+                    indicatorAnimationController.value = IndicatorAnimationCommand.resume;
                   },
                 ),
               ),
